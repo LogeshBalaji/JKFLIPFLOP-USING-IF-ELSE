@@ -53,45 +53,29 @@ Developed by: LOGESH B
 RegisterNumber: 212224110034
 ```
 ```.py
-module exp7(q, qb,j,k,clock,reset);
-    input j,k,clock,reset;
-    output reg q, qb;
-	 
-always @ (posedge (clock))
+module jkff(j,k,clk,q,qbar);
+input j,k,clk;
+output reg q,qbar;
+initial 
+begin
+q=1'b0;
+q=1'b1;
+end 
 
-    begin 
-        if (!reset)
-            begin
-               q <= q;
-               qb <=qb;
-            end   
-        
-else
-   begin
-	   if(j==0 && k==0)
-		   begin
-			q<=q;
-			qb<=qb;
-			end
-		else if(j!=k)
-		   begin
-			q<=j;
-			qb<=k;
-			end
-		else if(j==1 && k==1)
-		    begin
-			 q<=~q;
-			 qb<=~qb;
-			 end
-	end
-end	
+always @(posedge clk)
+begin 
+q<=(j&~q)|(~k&q);
+qbar<=~q;
+end
 endmodule
 ```
 **RTL LOGIC FOR FLIPFLOPS**
-![Screenshot 2025-04-23 084047](https://github.com/user-attachments/assets/7042763d-d183-4ef4-bb07-f3919ca6d7ff)
+![Screenshot 2025-05-02 140809](https://github.com/user-attachments/assets/e39dff15-32d6-4f8f-b3d2-e6b74b37c376)
+
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
-![Screenshot 2025-04-23 085737](https://github.com/user-attachments/assets/bda50ed8-e157-49e1-ba7e-5f575395c5b9)
+![Screenshot 2025-05-02 141948](https://github.com/user-attachments/assets/87cd0bbc-54db-4955-838a-129216d7fc7e)
+
 
 **RESULTS**
 
